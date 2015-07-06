@@ -3233,8 +3233,6 @@ static int handle_pte_fault(struct mm_struct *mm,
 				return do_linear_fault(mm, vma, address,
 						pte, pmd, flags, entry);
 
-			return do_anonymous_page(mm, vma, address,
-						 pte, pmd, flags);
 		}
 		if (pte_file(entry))
 			return do_nonlinear_fault(mm, vma, address,
