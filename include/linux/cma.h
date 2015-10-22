@@ -31,7 +31,7 @@ extern int cma_init_reserved_mem(phys_addr_t base, phys_addr_t size,
 					struct cma **res_cma);
 
 extern int cma_alloc_range_ok(struct cma *cma, int count, int align);
-extern struct page *cma_alloc(struct cma *cma, unsigned int count, unsigned int align);
+extern struct page *cma_alloc(struct cma *cma, size_t count, unsigned int align);
 extern bool cma_release(struct cma *cma, const struct page *pages, unsigned int count);
 extern struct page *cma_alloc_large(struct cma *cma, int count, unsigned int align);
 
