@@ -425,7 +425,6 @@ static void ion_handle_get(struct ion_handle *handle)
 	kref_get(&handle->ref);
 }
 
-/* Must hold the client lock */
 static struct ion_handle *ion_handle_get_check_overflow(struct ion_handle *handle)
 {
 	if (atomic_read(&handle->ref.refcount) + 1 == 0)
@@ -524,9 +523,24 @@ static struct ion_handle *ion_handle_get_by_id_nolock(struct ion_client *client,
 
 	handle = idr_find(&client->idr, id);
 	if (handle)
+<<<<<<< HEAD
 		return ion_handle_get_check_overflow(handle);
 
 	return ERR_PTR(-EINVAL);
+}
+
+struct ion_handle *ion_handle_get_by_id(struct ion_client *client,
+						int id)
+{
+	struct ion_handle *handle;
+
+	mutex_lock(&client->lock);
+	handle = ion_handle_get_by_id_nolock(client, id);
+	mutex_unlock(&client->lock);
+
+		ion_handle_get(handle);
+
+	return handle;
 }
 
 struct ion_handle *ion_handle_get_by_id(struct ion_client *client,
@@ -1562,6 +1576,7 @@ static long ion_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
 		handle = ion_handle_get_by_id_nolock(client, data.handle.handle);
 		if (IS_ERR(handle)) {
 			mutex_unlock(&client->lock);
+
 			IONMSG("ION_IOC_FREE handle is invalid. handle = %d, ret = %d.\n", data.handle.handle, ret);
 			return PTR_ERR(handle);
 		}
