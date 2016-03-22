@@ -201,6 +201,7 @@ static inline bool unconditional(const struct ip6t_entry *e)
 
 	return e->target_offset == sizeof(struct ip6t_entry) &&
 		memcmp(&e->ipv6, &uncond, sizeof(uncond)) == 0;
+
 }
 
 static inline const struct xt_entry_target *
@@ -762,6 +763,7 @@ check_entry_size_and_hooks(struct ip6t_entry *e,
 		if ((unsigned char *)e - base == underflows[h]) {
 			if (!check_underflow(e)) {
 				pr_debug("Underflows must be unconditional and use the STANDARD target with ACCEPT/DROP\n");
+
 				return -EINVAL;
 			}
 			newinfo->underflow[h] = underflows[h];
