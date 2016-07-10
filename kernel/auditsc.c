@@ -1013,6 +1013,7 @@ static int audit_log_pid_context(struct audit_context *context, pid_t pid,
 }
 
 static void audit_log_execve_info(struct audit_context *context,
+<<<<<<< HEAD
 				 struct audit_buffer **ab)
 {
 	long len_max;
@@ -1063,6 +1064,7 @@ static int audit_log_single_execve_arg(struct audit_context *context,
 					size_t *len_sent,
 					const char __user *p,
 					char *buf)
+
 {
 	long len_max;
 	long len_rem;
@@ -1125,7 +1127,6 @@ static int audit_log_single_execve_arg(struct audit_context *context,
 				memmove(buf_head, buf, len_buf);
 				buf = buf_head;
 			}
-<<<<<<< HEAD
 
 			/* fetch as much as we can of the argument */
 			len_tmp = strncpy_from_user(&buf_head[len_buf], p,
@@ -1158,40 +1159,6 @@ static int audit_log_single_execve_arg(struct audit_context *context,
 			len_buf += len_tmp;
 			buf_head[len_buf] = '\0';
 
-=======
-
-			/* fetch as much as we can of the argument */
-			len_tmp = strncpy_from_user(&buf_head[len_buf], p,
-						    len_max - len_buf);
-			if (len_tmp == -EFAULT) {
-				/* unable to copy from userspace */
-				send_sig(SIGKILL, current, 0);
-				goto out;
-			} else if (len_tmp == (len_max - len_buf)) {
-				/* buffer is not large enough */
-				require_data = true;
-				/* NOTE: if we are going to span multiple
-				 *       buffers force the encoding so we stand
-				 *       a chance at a sane len_full value and
-				 *       consistent record encoding */
-				encode = true;
-				len_full = len_full * 2;
-				p += len_tmp;
-			} else {
-				require_data = false;
-				if (!encode)
-					encode = audit_string_contains_control(
-								buf, len_tmp);
-				/* try to use a trusted value for len_full */
-				if (len_full < len_max)
-					len_full = (encode ?
-						    len_tmp * 2 : len_tmp);
-				p += len_tmp + 1;
-			}
-			len_buf += len_tmp;
-			buf_head[len_buf] = '\0';
-
->>>>>>> 3f4976f0e610... audit: fix a double fetch in audit_log_single_execve_arg()
 			/* length of the buffer in the audit record? */
 			len_abuf = (encode ? len_buf * 2 : len_buf + 2);
 		}
