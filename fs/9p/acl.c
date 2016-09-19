@@ -330,6 +330,7 @@ static int v9fs_xattr_set_acl(struct dentry *dentry, const char *name,
 				 * ACL can be represented
 				 * by the mode bits. So don't
 				 * update ACL.
+<<<<<<< HEAD
 			*/
 			value = NULL;
 			size = 0;
@@ -340,6 +341,18 @@ static int v9fs_xattr_set_acl(struct dentry *dentry, const char *name,
 		 * mode ?
 		 */
 		v9fs_vfs_setattr_dotl(dentry, &iattr);
+=======
+				 */
+				value = NULL;
+				size = 0;
+			}
+			iattr.ia_valid = ATTR_MODE;
+			/* FIXME should we update ctime ?
+			 * What is the following setxattr update the
+			 * mode ?
+			 */
+			v9fs_vfs_setattr_dotl(dentry, &iattr);
+>>>>>>> d8333c045f04... posix_acl: Clear SGID bit when setting file permissions
 		}
 		break;
 	case ACL_TYPE_DEFAULT:
