@@ -278,6 +278,7 @@ static int xhci_plat_remove(struct platform_device *dev)
 #ifdef CONFIG_USB_XHCI_MTK
 	mtk_xhci_vbus_off(dev);
 #endif
+	xhci->xhc_state |= XHCI_STATE_REMOVING;
 
 	usb_remove_hcd(xhci->shared_hcd);
 	usb_put_hcd(xhci->shared_hcd);
