@@ -5299,12 +5299,18 @@ void tcp_finish_connect(struct sock *sk, struct sk_buff *skb)
 #endif
 
 	tcp_set_state(sk, TCP_ESTABLISHED);
+
+    
 #ifdef CONFIG_MTK_NET_LOGGING
 	if (skb) {
 		pr_info("[mtk_net][tcp_finish_connect] inode = %lu; sport = %d; dport = %d\n",
 			sk->sk_socket ? SOCK_INODE(sk->sk_socket)->i_ino : 0, ntohs(th->dest), ntohs(th->source));
 	}
 #endif
+
+	icsk->icsk_ack.lrcvtime = tcp_time_stamp;
+
+
 	if (skb != NULL) {
 		icsk->icsk_af_ops->sk_rx_dst_set(sk, skb);
 		security_inet_conn_established(sk, skb);
@@ -5507,7 +5513,6 @@ static int tcp_rcv_synsent_state_process(struct sock *sk, struct sk_buff *skb,
 			 * to stand against the temptation 8)     --ANK
 			 */
 			inet_csk_schedule_ack(sk);
-			icsk->icsk_ack.lrcvtime = tcp_time_stamp;
 			tcp_enter_quickack_mode(sk);
 			inet_csk_reset_xmit_timer(sk, ICSK_TIME_DACK,
 						  TCP_DELACK_MAX, sysctl_tcp_rto_max);
