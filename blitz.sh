@@ -9,14 +9,13 @@ echo " /        \  |    |/    |    \    |   \ |    |   "
 echo "/_______  /  |____|\____|__  /____|_  / |____|   "
 echo "        \/                 \/       \/           "
 
-echo "Blitz Kernel By Ninad Patil Powered By ReignZ "
-PATH=${PATH}:~/toolchains/UBERTC/aarch64-linux-android-4.9/bin/
-export KBUILD_BUILD_USER="NINAD"
-export KBUILD_BUILD_HOST="REIGNZ"
-PATH=${PATH}:~/toolchains/UBERTC/aarch64-linux-android-4.9/bin
-export ARCH=arm64
-make kungfu_m_defconfig ARCH=arm64 CROSS_COMPILE=aarch64-linux-android-
-make -j5 ARCH=arm64 CROSS_COMPILE=aarch64-linux-android-
+echo "Blitz Kernel By Ninad Patil Powered By ReignZ"
+outdir=$PWD/../../kernelout
+cross=$PWD/../aarch64-linux-android-4.9-kernel/bin/aarch64-linux-android-
+export KBUILD_BUILD_USER="NINAD" export KBUILD_BUILD_HOST="REIGNZ"
+export ARCH=arm64 export SUB_ARCH=arm64 export TARGET_PRODUCT=kungfu_m
+make -j`nproc --all` O=$outdir CROSS_COMPILE=$cross kungfu_m_defconfig
+make -j`nproc --all` O=$outdir CROSS_COMPILE=$cross
 
 #echo " ______ _______   __ _      ___________ _   _  ______ _     _____ ___________ "
 #echo " | ___ \_   _\ \ / /| |    |  ___| ___ \ \ | | | ___ \ |   |_   _|_   _|___  /"
