@@ -9,9 +9,9 @@ echo " /        \  |    |/    |    \    |   \ |    |   "
 echo "/_______  /  |____|\____|__  /____|_  / |____|   "
 echo "        \/                 \/       \/           "
 
-echo "Blitz Kernel By Ninad Patil Powered By Reignz"
-PATH=${PATH}:~/toolchains/UBERTC/aarch64-linux-android-4.9/bin
-export KBUILD_BUILD_USER="Ninad"
+echo "Blitz Kernel By Ninad Patil Powered By ReignZ "
+PATH=${PATH}:~/toolchains/UBERTC/aarch64-linux-android-4.9/bin/
+export KBUILD_BUILD_USER="NINAD"
 export KBUILD_BUILD_HOST="REIGNZ"
 PATH=${PATH}:~/toolchains/UBERTC/aarch64-linux-android-4.9/bin
 export ARCH=arm64
@@ -30,11 +30,13 @@ make -j5 ARCH=arm64 CROSS_COMPILE=aarch64-linux-android-
 echo ""
 tput setaf 2;
 tput bold
-echo "       (     (               )  "
-echo "   (   )\ )  )\ )  *   )  ( /(  "
-echo " ( )\ (()/( (()/(` )  /(  )\()) "
-echo " )((_) /(_)) /(_))( )(_))((_)\  "
-echo "((_)_ (_))  (_)) (_(_())  _((_) "
-echo " | _ )| |   |_ _||_   _| |_  /  "
-echo " | _ \| |__  | |   | |    / /   "
-echo " |___/|____||___|  |_|   /___|  "
+echo " (    (        )  (          (        )         (     (               )  "
+echo " )\ ) )\ )  ( /(  )\ )       )\ )  ( /(     (   )\ )  )\ )  *   )  ( /(  "
+echo "(()/((()/(  )\())(()/(  (   (()/(  )\())  ( )\ (()/( (()/(  )  /(  )\()) "
+echo " /(_))/(_))((_)\  /(_)) )\   /(_))((_)\   )((_) /(_)) /(_))( )(_))((_)\  "
+echo "(_)) (_))  __((_)(_))  ((_) (_))   _((_) ((_)_ (_))  (_)) (_(_())  _((_) "
+echo "| _ \|_ _| \ \/ /| |   | __|| _ \ | \| |  | _ )| |   |_ _||_   _| |_  /  "
+echo "|  _/ | |   >  < | |__ | _| |   / |    |  | _ \| |__  | |   | |    / /   "
+echo "|_|  |___| /_/\_\|____||___||_|_\ |_|\_|  |___/|____||___|  |_|   /___|  "
+echo "                                                                         "
+echo ""
