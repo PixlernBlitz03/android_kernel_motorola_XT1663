@@ -166,8 +166,9 @@ static int create_fixed_stream_quirk(struct snd_usb_audio *chip,
 	alts = &iface->altsetting[fp->altset_idx];
 	altsd = get_iface_desc(alts);
 	if (altsd->bNumEndpoints < 1) {
-		err = -EINVAL;
-		goto error;
+		kfree(fp);
+		kfree(rate_table);
+		return -EINVAL;
 	}
 
 	fp->protocol = altsd->bInterfaceProtocol;
@@ -181,7 +182,7 @@ static int create_fixed_stream_quirk(struct snd_usb_audio *chip,
 	snd_usb_init_sample_rate(chip, fp->iface, alts, fp, fp->rate_max);
 	return 0;
 
- error:
+error:
 	list_del(&fp->list); /* unlink for avoiding double-free */
 	kfree(fp);
 	kfree(rate_table);
