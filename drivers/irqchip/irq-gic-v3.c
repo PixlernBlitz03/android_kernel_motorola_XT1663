@@ -462,6 +462,12 @@ static void gic_send_sgi(u64 cluster_id, u16 tlist, unsigned int irq)
 {
 	u64 val;
 
+	val = (MPIDR_AFFINITY_LEVEL(cluster_id, 3) << 48	|
+		MPIDR_AFFINITY_LEVEL(cluster_id, 2) << 32	|
+		irq << 24					|
+		MPIDR_AFFINITY_LEVEL(cluster_id, 1) << 16	|
+		tlist);
+
 	val = (MPIDR_TO_SGI_AFFINITY(cluster_id, 3)	|
 	       MPIDR_TO_SGI_AFFINITY(cluster_id, 2)	|
 	       irq << ICC_SGI1R_SGI_ID_SHIFT		|
