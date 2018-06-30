@@ -591,3 +591,5 @@ CONFIG_CUSTOM_KERNEL_SIGNIFICANT_MOTION_SENSOR=""
 #For OTP unlock BL
 CONFIG_MTK_EMMC_SUPPORT_OTP=y
 ###################### Lenovo BSP Feature end #########################
+#LIVEDISPLAY
+MTK_VIDEOX_LIVEDISPLAY=y
