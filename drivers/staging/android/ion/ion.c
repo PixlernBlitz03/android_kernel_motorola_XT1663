@@ -523,7 +523,7 @@ static struct ion_handle *ion_handle_get_by_id_nolock(struct ion_client *client,
 
 	handle = idr_find(&client->idr, id);
 	if (handle)
-<<<<<<< HEAD
+        
 		return ion_handle_get_check_overflow(handle);
 
 	return ERR_PTR(-EINVAL);
@@ -539,18 +539,6 @@ struct ion_handle *ion_handle_get_by_id(struct ion_client *client,
 	mutex_unlock(&client->lock);
 
 		ion_handle_get(handle);
-
-	return handle;
-}
-
-struct ion_handle *ion_handle_get_by_id(struct ion_client *client,
-						int id)
-{
-	struct ion_handle *handle;
-
-	mutex_lock(&client->lock);
-	handle = ion_handle_get_by_id_nolock(client, id);
-	mutex_unlock(&client->lock);
 
 	return handle;
 }
@@ -732,8 +720,7 @@ void ion_free(struct ion_client *client, struct ion_handle *handle)
 	mutex_lock(&client->lock);
 	ion_free_nolock(client, handle);
 	mutex_unlock(&client->lock);
-	MMProfileLogEx(ION_MMP_Events[PROFILE_FREE], MMProfileFlagPulse,
-			 (unsigned long)client, (unsigned long)handle);
+    
 }
 EXPORT_SYMBOL(ion_free);
 
