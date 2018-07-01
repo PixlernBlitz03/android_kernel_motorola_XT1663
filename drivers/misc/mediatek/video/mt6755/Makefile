@@ -65,6 +65,7 @@ ccflags-y += -I$(srctree)/drivers/misc/mediatek/video/include/                  
              -I$(srctree)/drivers/misc/mediatek/mmp/
 
 ccflags-$(CONFIG_MTK_LCM) += -I$(srctree)/drivers/misc/mediatek/lcm/inc/
+obj-$(CONFIG_MTK_KCAL_CTRL) += mtk_kcal_ctrl.o
 
 ifeq ($(CONFIG_MTK_SEC_VIDEO_PATH_SUPPORT),y)
 ifeq ($(CONFIG_TRUSTONIC_TEE_SUPPORT),y)
