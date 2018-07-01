@@ -2028,7 +2028,6 @@ int composite_os_desc_req_prepare(struct usb_composite_dev *cdev,
 					 GFP_KERNEL);
 #else
 	cdev->os_desc_req->buf = kmalloc(4096, GFP_KERNEL);
-    
 #endif
 
 	if (!cdev->os_desc_req->buf) {
